@@ -13,7 +13,6 @@ describe("Lightspeed's refresh token function", () => {
     const accessToken = await refreshToken();
     assert.equal(typeof accessToken, 'string');
     assert.equal(accessToken.length, 40);
-    console.log(accessToken);
   });
 
   it('Handles errors', async () => {
@@ -22,7 +21,10 @@ describe("Lightspeed's refresh token function", () => {
     delete process.env.LIGHTSPEED_SECRET;
     delete process.env.LIGHTSPEED_REFRESH_TOKEN;
     const badRefreshToken = require('../../../lib/functions/lightspeed/refreshToken.js');
-    const error = await badRefreshToken();
-    assert.equal(error.isAxiosError, true);
+    try {
+      await badRefreshToken();
+    } catch (err) {
+      assert.equal(err.isAxiosError, true);
+    }
   });
 });
