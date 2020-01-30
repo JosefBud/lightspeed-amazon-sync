@@ -1,65 +1,39 @@
 const axios = require('axios');
-const lightspeedId = process.env.LIGHTSPEED_ID;
-const lightspeedSecret = process.env.LIGHTSPEED_SECRET;
-const lightspeedRefreshToken = process.env.LIGHTSPEED_REFRESH_TOKEN;
+const refreshToken = require('./lib/functions/lightspeed/refreshToken.js');
+const getAccountId = require('./lib/functions/lightspeed/getAccountId.js');
 const lightspeedApi = 'https://api.lightspeedapp.com/API';
 
-const tokenRequestBody = {
-  grant_type: 'refresh_token',
-  client_id: lightspeedId,
-  client_secret: lightspeedSecret,
-  refresh_token: lightspeedRefreshToken
-};
-
-// refresh the token
-axios({
-  url: 'https://cloud.lightspeedapp.com/oauth/access_token.php',
-  method: 'post',
-  headers: {
-    'Content-Type': 'application/json'
-  },
-  data: JSON.stringify(tokenRequestBody)
-})
-  .then(response => {
-    const lightspeedAccessToken = response.data.access_token;
+(async () => {
+  // refresh the token
+  const accessToken = await refreshToken();
+  if (typeof accessToken == 'string') {
+    // creating the authentication header for all future API calls
     const authHeader = {
-      Authorization: `Bearer ${lightspeedAccessToken}`
+      Authorization: `Bearer ${accessToken}`
     };
 
-    // get account ID using 'https://api.lightspeedapp.com/API/Account.json'
-    axios({
-      url: `${lightspeedApi}/Account.json`,
-      method: 'get',
-      headers: authHeader
-    })
-      .then(response => {
-        let lightspeedAccountId;
-        if (response.data.Account.accountID) {
-          lightspeedAccountId = response.data.Account.accountID;
-        } else {
-          console.error(response.data);
-          return;
-        }
+    // getting the account ID
+    const accountId = await getAccountId(authHeader);
+  }
+})();
 
-        const loadRelations = {
-          load_relations: JSON.stringify(['CustomFieldValues'])
-        };
+/* 
+const loadRelations = {
+  load_relations: JSON.stringify(['CustomFieldValues'])
+};
 
-        const value = 'CustomFieldValues.value=B00B364Z1U';
+const value = 'CustomFieldValues.value=B00B364Z1U';
 
-        axios({
-          url: `${lightspeedApi}/Account/${lightspeedAccountId}/Item.json?load_relations=${JSON.stringify(
-            ['CustomFieldValues']
-          )}&CustomFieldValues.value=!~,`,
-          method: 'get',
-          headers: authHeader
-          //params: loadRelations
-        })
-          .then(response => {
-            console.log(response.data.Item[0].CustomFieldValues);
-          })
-          .catch(error => console.error(error));
-      })
-      .catch(error => console.error(error));
+axios({
+  url: `${lightspeedApi}/Account/${lightspeedAccountId}/Item.json?load_relations=${JSON.stringify(
+    ['CustomFieldValues']
+  )}&CustomFieldValues.value=B00B364Z1U`,
+  method: 'get',
+  headers: authHeader
+  //params: loadRelations
+})
+  .then(response => {
+    console.log(response.headers);
   })
   .catch(error => console.error(error));
+ */
