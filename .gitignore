@@ -1,3 +1,7 @@
+# Environment variables stuff
+setEnvVars.sh
+.vscode/launch.json
+
 # Logs
 logs
 *.log
