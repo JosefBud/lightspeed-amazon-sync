@@ -29,7 +29,7 @@ describe("Lightspeed's sales parse function", () => {
     delete salesRaw.Sale;
 
     const sales = await parseSales(salesRaw);
-    assert.equal(sales.length, 0);
+    assert.strictEqual(sales.length, 0);
   });
 
   it('Correctly parses a range with 1 sale of 1 item', async () => {
@@ -41,8 +41,8 @@ describe("Lightspeed's sales parse function", () => {
 
     const sales = await parseSales(salesRaw);
     const expected = [{ itemId: '60', qty: 1 }];
-    assert.equal(sales[0].itemId, expected[0].itemId);
-    assert.equal(sales[0].qty, expected[0].qty);
+    assert.strictEqual(sales[0].itemId, expected[0].itemId);
+    assert.strictEqual(sales[0].qty, expected[0].qty);
   });
 
   it('Correctly parses a range with 1 sale of multiple items', async () => {
@@ -63,10 +63,11 @@ describe("Lightspeed's sales parse function", () => {
       { itemId: '60', qty: 1 },
       { itemId: '61', qty: 2 }
     ];
-    assert.equal(sales[0].itemId, expected[0].itemId);
-    assert.equal(sales[1].itemId, expected[1].itemId);
-    assert.equal(sales[0].unitQuantity, expected[0].unitQuantity);
-    assert.equal(sales[1].unitQuantity, expected[1].unitQuantity);
+
+    assert.strictEqual(sales[0].itemId, expected[0].itemId);
+    assert.strictEqual(sales[1].itemId, expected[1].itemId);
+    assert.strictEqual(sales[0].qty, expected[0].qty);
+    assert.strictEqual(sales[1].qty, expected[1].qty);
   });
 
   it('Correctly parses a range with multiple sales of 1 item', async () => {
@@ -95,10 +96,10 @@ describe("Lightspeed's sales parse function", () => {
     const sales = await parseSales(salesRaw);
     const firstExpected = { itemId: '60', qty: 1 };
     const secondExpected = { itemId: '61', qty: 2 };
-    assert.equal(sales[0].itemId, firstExpected.itemId);
-    assert.equal(sales[1].itemId, secondExpected.itemId);
-    assert.equal(sales[0].qty, firstExpected.qty);
-    assert.equal(sales[1].qty, secondExpected.qty);
+    assert.strictEqual(sales[0].itemId, firstExpected.itemId);
+    assert.strictEqual(sales[1].itemId, secondExpected.itemId);
+    assert.strictEqual(sales[0].qty, firstExpected.qty);
+    assert.strictEqual(sales[1].qty, secondExpected.qty);
   });
 
   it('Correctly parses a range with multiple sales of multiple items', async () => {
@@ -144,8 +145,8 @@ describe("Lightspeed's sales parse function", () => {
       { itemId: '63', qty: 4 }
     ];
     sales.forEach((sale, index) => {
-      assert.equal(sale.itemId, expected[index].itemId);
-      assert.equal(sale.qty, expected[index].qty);
+      assert.strictEqual(sale.itemId, expected[index].itemId);
+      assert.strictEqual(sale.qty, expected[index].qty);
     });
   });
 
@@ -174,9 +175,9 @@ describe("Lightspeed's sales parse function", () => {
 
     const sales = await parseSales(salesRaw);
     const expected = [{ itemId: '61', qty: 2 }];
-    assert.equal(sales[0].itemId, expected[0].itemId);
-    assert.equal(sales[0].qty, expected[0].qty);
-    assert.equal(sales[1], null);
+    assert.strictEqual(sales[0].itemId, expected[0].itemId);
+    assert.strictEqual(sales[0].qty, expected[0].qty);
+    assert.strictEqual(sales[1], undefined);
   });
 
   it('Rejects a single incomplete sale', async () => {
@@ -192,6 +193,6 @@ describe("Lightspeed's sales parse function", () => {
     };
 
     const sales = await parseSales(salesRaw);
-    assert.equal(sales.length, 0);
+    assert.strictEqual(sales.length, 0);
   });
 });
