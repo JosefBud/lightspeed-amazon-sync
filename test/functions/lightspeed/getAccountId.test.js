@@ -1,6 +1,5 @@
 require('dotenv').config();
 const assert = require('assert');
-const decache = require('decache');
 const refreshToken = require('../../../lib/functions/lightspeed/refreshToken.js');
 const getAccountId = require('../../../lib/functions/lightspeed/getAccountId.js');
 
@@ -19,7 +18,6 @@ describe("Lightspeed's account ID retrieval", () => {
   });
 
   it('Handles errors', async () => {
-    const getAccountId = require('../../../lib/functions/lightspeed/getAccountId.js');
     try {
       await getAccountId();
     } catch (err) {
