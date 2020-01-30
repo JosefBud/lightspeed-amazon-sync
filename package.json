@@ -30,6 +30,7 @@
     "axios": "^0.19.2"
   },
   "devDependencies": {
+    "dotenv": "^8.2.0",
     "mocha": "^7.0.1",
     "nyc": "^15.0.0"
   }
