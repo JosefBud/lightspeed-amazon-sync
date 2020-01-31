@@ -2,8 +2,14 @@
 
 A Node.js app to sync inventory counts between Lightspeed Retail and an Amazon merchant account
 
-Follow usage instructions for the [amazon-mws node package](https://www.npmjs.com/package/amazon-mws) to set up the various environment variables needed for a successful MWS connection.
+Set up the following environment variables:
 
-Set up `LIGHTSPEED_ID` and `LIGHTSPEED_SECRET` environment variables for your Lightspeed API client ID and client secret, respectively.
-
-Also, set up `LIGHTSPEED_REFRESH_TOKEN` environment variable for your Lightspeed API refresh token code.
+```
+LIGHTSPEED_ID
+LIGHTSPEED_SECRET
+LIGHTSPEED_REFRESH_TOKEN
+MWS_ACCESS_KEY_ID
+MWS_SECRET_ACCESS_KEY
+MWS_AUTH_TOKEN
+MWS_SELLER_ID
+```
