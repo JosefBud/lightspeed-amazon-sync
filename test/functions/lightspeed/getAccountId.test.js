@@ -1,7 +1,7 @@
 require('dotenv').config();
 const assert = require('assert');
 const refreshToken = require('../../../lib/functions/lightspeed/refreshToken.js');
-const getAccountId = require('../../../lib/functions/lightspeed/getAccountId.js');
+const getAccountID = require('../../../lib/functions/lightspeed/getAccountID.js');
 
 let authHeader;
 before(async () => {
@@ -13,13 +13,13 @@ before(async () => {
 
 describe("Lightspeed's account ID retrieval", () => {
   it('Returns the correct test ID', async () => {
-    const accountId = await getAccountId(authHeader);
-    assert.equal(accountId, process.env.LIGHTSPEED_ACCOUNT_ID);
+    const accountID = await getAccountID(authHeader);
+    assert.equal(accountID, process.env.LIGHTSPEED_ACCOUNT_ID);
   });
 
   it('Handles errors', async () => {
     try {
-      await getAccountId();
+      await getAccountID();
     } catch (err) {
       assert.equal(err.isAxiosError, true);
     }

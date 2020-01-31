@@ -40,8 +40,8 @@ describe("Lightspeed's sales parse function", () => {
     };
 
     const sales = await parseSales(salesRaw);
-    const expected = [{ itemId: '60', qty: 1 }];
-    assert.strictEqual(sales[0].itemId, expected[0].itemId);
+    const expected = [{ itemID: '60', qty: 1 }];
+    assert.strictEqual(sales[0].itemID, expected[0].itemID);
     assert.strictEqual(sales[0].qty, expected[0].qty);
   });
 
@@ -60,12 +60,12 @@ describe("Lightspeed's sales parse function", () => {
 
     const sales = await parseSales(salesRaw);
     const expected = [
-      { itemId: '60', qty: 1 },
-      { itemId: '61', qty: 2 }
+      { itemID: '60', qty: 1 },
+      { itemID: '61', qty: 2 }
     ];
 
-    assert.strictEqual(sales[0].itemId, expected[0].itemId);
-    assert.strictEqual(sales[1].itemId, expected[1].itemId);
+    assert.strictEqual(sales[0].itemID, expected[0].itemID);
+    assert.strictEqual(sales[1].itemID, expected[1].itemID);
     assert.strictEqual(sales[0].qty, expected[0].qty);
     assert.strictEqual(sales[1].qty, expected[1].qty);
   });
@@ -94,10 +94,10 @@ describe("Lightspeed's sales parse function", () => {
     ];
 
     const sales = await parseSales(salesRaw);
-    const firstExpected = { itemId: '60', qty: 1 };
-    const secondExpected = { itemId: '61', qty: 2 };
-    assert.strictEqual(sales[0].itemId, firstExpected.itemId);
-    assert.strictEqual(sales[1].itemId, secondExpected.itemId);
+    const firstExpected = { itemID: '60', qty: 1 };
+    const secondExpected = { itemID: '61', qty: 2 };
+    assert.strictEqual(sales[0].itemID, firstExpected.itemID);
+    assert.strictEqual(sales[1].itemID, secondExpected.itemID);
     assert.strictEqual(sales[0].qty, firstExpected.qty);
     assert.strictEqual(sales[1].qty, secondExpected.qty);
   });
@@ -139,13 +139,13 @@ describe("Lightspeed's sales parse function", () => {
 
     const sales = await parseSales(salesRaw);
     const expected = [
-      { itemId: '60', qty: 1 },
-      { itemId: '61', qty: 2 },
-      { itemId: '62', qty: 3 },
-      { itemId: '63', qty: 4 }
+      { itemID: '60', qty: 1 },
+      { itemID: '61', qty: 2 },
+      { itemID: '62', qty: 3 },
+      { itemID: '63', qty: 4 }
     ];
     sales.forEach((sale, index) => {
-      assert.strictEqual(sale.itemId, expected[index].itemId);
+      assert.strictEqual(sale.itemID, expected[index].itemID);
       assert.strictEqual(sale.qty, expected[index].qty);
     });
   });
@@ -174,8 +174,8 @@ describe("Lightspeed's sales parse function", () => {
     ];
 
     const sales = await parseSales(salesRaw);
-    const expected = [{ itemId: '61', qty: 2 }];
-    assert.strictEqual(sales[0].itemId, expected[0].itemId);
+    const expected = [{ itemID: '61', qty: 2 }];
+    assert.strictEqual(sales[0].itemID, expected[0].itemID);
     assert.strictEqual(sales[0].qty, expected[0].qty);
     assert.strictEqual(sales[1], undefined);
   });
