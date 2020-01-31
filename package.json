@@ -28,7 +28,8 @@
   "homepage": "https://github.com/JosefBud/lightspeed-amazon-sync#readme",
   "dependencies": {
     "amazon-mws": "0.0.25",
-    "axios": "^0.19.2"
+    "axios": "^0.19.2",
+    "xmlbuilder": "^13.0.2"
   },
   "devDependencies": {
     "decache": "^4.5.1",
