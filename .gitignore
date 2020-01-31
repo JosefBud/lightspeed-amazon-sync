@@ -2,6 +2,9 @@
 setEnvVars.sh
 .vscode/launch.json
 
+# VSCode snippets
+*.code-snippets
+
 # Logs
 logs
 *.log
