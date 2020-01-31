@@ -1,7 +1,7 @@
 require('dotenv').config();
 const assert = require('assert');
 const refreshToken = require('../../../lib/functions/lightspeed/refreshToken.js');
-const getASINs = require('../../../lib/functions/lightspeed/getASINs.js');
+const getSKUs = require('../../../lib/functions/lightspeed/getSKUs.js');
 
 let sales = [];
 let expected;
@@ -35,28 +35,28 @@ beforeEach(() => {
   ];
 
   expected = Array.from(sales);
-  expected[0].ASIN = 'B00B364Z1U';
-  expected[1].ASIN = 'B00B364Z4C';
-  expected[2].ASIN = 'B00B364Z1K';
-  expected[3].ASIN = 'B00B364Z4C';
+  expected[0].SKU = 'B00B364Z1U';
+  expected[1].SKU = 'B00B364Z4C';
+  expected[2].SKU = 'B00B364Z1K';
+  expected[3].SKU = 'B00B364Z4C';
 });
 
-describe('Getting ASINs for sold items', () => {
-  it('Gets ASINs for an array of only items with ASINs assigned', async () => {
-    sales = await getASINs(authHeader, accountID, sales);
+describe('Getting SKUs for sold items', () => {
+  it('Gets SKUs for an array of only items with SKUs assigned', async () => {
+    sales = await getSKUs(authHeader, accountID, sales);
 
     assert.deepEqual(sales, expected);
   });
 
-  it('Gets ASINs for an array of mixed items; some with ASINs assigned and others without', async () => {
+  it('Gets SKUs for an array of mixed items; some with SKUs assigned and others without', async () => {
     sales.push({ itemID: '639', qty: 3 });
-    expected.push({ itemID: '639', qty: 3, ASIN: '' });
-    sales = await getASINs(authHeader, accountID, sales);
+    expected.push({ itemID: '639', qty: 3, SKU: '' });
+    sales = await getSKUs(authHeader, accountID, sales);
 
     assert.deepEqual(sales, expected);
   });
 
-  it('Fails gracefully with an array of only items without ASINs assigned', async () => {
+  it('Fails gracefully with an array of only items without SKUs assigned', async () => {
     sales = [
       {
         itemID: '639',
@@ -68,35 +68,35 @@ describe('Getting ASINs for sold items', () => {
       }
     ];
     expected = Array.from(sales);
-    expected[0].ASIN = '';
-    expected[1].ASIN = '';
+    expected[0].SKU = '';
+    expected[1].SKU = '';
 
-    sales = await getASINs(authHeader, accountID, sales);
+    sales = await getSKUs(authHeader, accountID, sales);
 
     assert.deepEqual(sales, expected);
   });
 
-  it('Gets ASINs for a single item with ASIN assigned', async () => {
+  it('Gets SKUs for a single item with SKU assigned', async () => {
     sales.splice(0, 3);
     expected = Array.from(sales);
-    expected[0].ASIN = 'B00B364Z4C';
+    expected[0].SKU = 'B00B364Z4C';
 
-    sales = await getASINs(authHeader, accountID, sales);
+    sales = await getSKUs(authHeader, accountID, sales);
     assert.deepEqual(sales, expected);
   });
 
-  it('Gets ASINs for a single item without ASIN assigned', async () => {
+  it('Gets SKUs for a single item without SKU assigned', async () => {
     sales = [{ itemID: '637', qty: 2 }];
     expected = Array.from(sales);
-    expected[0].ASIN = '';
+    expected[0].SKU = '';
 
-    sales = await getASINs(authHeader, accountID, sales);
+    sales = await getSKUs(authHeader, accountID, sales);
     assert.deepEqual(sales, expected);
   });
 
   it('Fails gracefully with an error', async () => {
     try {
-      await getASINs(authHeader, 0, []);
+      await getSKUs(authHeader, 0, []);
     } catch (err) {
       assert.equal(err.isAxiosError, true);
     }
