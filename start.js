@@ -64,9 +64,7 @@ const lightspeedApi = 'https://api.lightspeedapp.com/API';
 
     // reconciles the inventory count, finalizing the sync
     // on a 2-second timeout for rate limiting
-    setTimeout(async () => {
-      await reconcileInventoryCount(authHeader, accountID, inventoryCountID);
-    }, 2000);
+    await reconcileInventoryCount(authHeader, accountID, inventoryCountID);
   }
   return;
   // refresh the token
