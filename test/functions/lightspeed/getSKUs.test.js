@@ -18,27 +18,27 @@ beforeEach(() => {
   sales = [
     {
       itemID: '65',
-      qty: 1
+      qty: 3
     },
     {
       itemID: '66',
-      qty: 1
+      qty: 0
     },
     {
       itemID: '67',
-      qty: 1
+      qty: 0
     },
     {
       itemID: '66',
-      qty: 2
+      qty: 0
     }
   ];
 
   expected = Array.from(sales);
-  expected[0].SKU = 'B00B364Z1U';
-  expected[1].SKU = 'B00B364Z4C';
-  expected[2].SKU = 'B00B364Z1K';
-  expected[3].SKU = 'B00B364Z4C';
+  expected[0].SKU = '22789';
+  expected[1].SKU = '22790';
+  expected[2].SKU = '22791';
+  expected.splice(3, 1);
 });
 
 describe('Getting SKUs for sold items', () => {
@@ -49,8 +49,8 @@ describe('Getting SKUs for sold items', () => {
   });
 
   it('Gets SKUs for an array of mixed items; some with SKUs assigned and others without', async () => {
-    sales.push({ itemID: '639', qty: 3 });
-    expected.push({ itemID: '639', qty: 3, SKU: '' });
+    sales.push({ itemID: '639', qty: 2 });
+    expected.push({ itemID: '639', qty: 2, SKU: '' });
     sales = await getSKUs(authHeader, accountID, sales);
 
     assert.deepEqual(sales, expected);
@@ -59,11 +59,11 @@ describe('Getting SKUs for sold items', () => {
   it('Fails gracefully with an array of only items without SKUs assigned', async () => {
     sales = [
       {
-        itemID: '639',
-        qty: 3
+        itemID: '637',
+        qty: 1
       },
       {
-        itemID: '637',
+        itemID: '639',
         qty: 2
       }
     ];
@@ -79,14 +79,14 @@ describe('Getting SKUs for sold items', () => {
   it('Gets SKUs for a single item with SKU assigned', async () => {
     sales.splice(0, 3);
     expected = Array.from(sales);
-    expected[0].SKU = 'B00B364Z4C';
+    expected[0].SKU = '22790';
 
     sales = await getSKUs(authHeader, accountID, sales);
     assert.deepEqual(sales, expected);
   });
 
   it('Gets SKUs for a single item without SKU assigned', async () => {
-    sales = [{ itemID: '637', qty: 2 }];
+    sales = [{ itemID: '637', qty: 1 }];
     expected = Array.from(sales);
     expected[0].SKU = '';
 
