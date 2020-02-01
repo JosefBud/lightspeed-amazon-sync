@@ -1,4 +1,3 @@
-const axios = require('axios');
 const refreshToken = require('./lib/functions/lightspeed/refreshToken.js');
 const getAccountID = require('./lib/functions/lightspeed/getAccountID.js');
 const getSales = require('./lib/functions/lightspeed/getSales.js');
@@ -11,11 +10,11 @@ const submitInventoryFeed = require('./lib/functions/amazon/submitInventoryFeed.
 const lightspeedApi = 'https://api.lightspeedapp.com/API';
 
 (async () => {
-  /* 
   // get a list of order IDs - the time range is measured in minutes ** getOrderIDs(minutes) **
   // the end of the time range is not now but 60 minutes in the past, due to an issue with the MWS API
-  const orders = await getOrderIDs(2000);
-  if (orders === undefined) {
+  const orders = await getOrderIDs(15);
+  console.log(orders);
+  if (orders === undefined || orders.length === 0) {
     return;
   }
 
@@ -23,8 +22,7 @@ const lightspeedApi = 'https://api.lightspeedapp.com/API';
   const orderItems = await getOrderItems(orders);
   console.log('complete', orderItems);
 
-  return; 
-  */
+  return;
   // refresh the token
   const accessToken = await refreshToken();
   if (typeof accessToken == 'string') {
@@ -37,7 +35,7 @@ const lightspeedApi = 'https://api.lightspeedapp.com/API';
     const accountID = await getAccountID(authHeader);
 
     // getting the past 60 minutes of Lightspeed sales
-    const salesRaw = await getSales(authHeader, accountID, 4000);
+    const salesRaw = await getSales(authHeader, accountID, 60);
     if (salesRaw['@attributes'] && salesRaw['@attributes'].count == '0') {
       return;
     }
