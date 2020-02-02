@@ -1,10 +1,7 @@
-const axios = require('axios');
-const fs = require('fs');
 const refreshToken = require('./lib/functions/lightspeed/refreshToken.js');
 const getAccountID = require('./lib/functions/lightspeed/getAccountID.js');
 const getFullInventory = require('./lib/functions/lightspeed/getFullInventory.js');
 const buildInventoryFeed = require('./lib/functions/amazon/buildInventoryFeed.js');
-const lightspeedApi = 'https://api.lightspeedapp.com/API';
 
 (async () => {
   // refresh the token
