@@ -29,6 +29,7 @@
   "dependencies": {
     "amazon-mws": "0.0.25",
     "axios": "^0.19.2",
+    "winston": "^3.2.1",
     "xmlbuilder": "^13.0.2"
   },
   "devDependencies": {
