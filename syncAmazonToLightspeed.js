@@ -60,7 +60,7 @@ const syncAmazonToLightspeed = async () => {
       ).catch(err => console.error(err));
 
       console.log(orderItems);
-      if (orderItems) {
+      if (orderItems[0]) {
         // creates an inventory count and fills it with the order items
         const inventoryCountID = await createInventoryCount(
           authHeader,
