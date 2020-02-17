@@ -22,12 +22,10 @@ const syncLightspeedToAmazon = async () => {
         console.error(err)
       );
 
-      // getting the past 60 minutes of Lightspeed sales
-      const salesRaw = await getSales(
-        authHeader,
-        accountID,
-        60 * 24 * 30
-      ).catch(err => console.error(err));
+      // getting the past 15 minutes of Lightspeed sales
+      const salesRaw = await getSales(authHeader, accountID, 15).catch(err =>
+        console.error(err)
+      );
       if (salesRaw['@attributes'] && salesRaw['@attributes'].count == '0') {
         logger.log({
           level: 'info',

@@ -5,6 +5,9 @@ setEnvVars.sh
 # VSCode snippets
 *.code-snippets
 
+# PM2 ecosystem
+ecosystem.config.js
+
 # Logs
 logs
 *.log

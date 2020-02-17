@@ -31,8 +31,6 @@ const buildInventoryFeed = require('./lib/functions/amazon/buildInventoryFeed.js
     // takes you to ship an item.. unfortunately this is a required field on Amazon's end.
     const inventoryFeed = await buildInventoryFeed(inventory, 4);
 
-    return;
-
     // submits the inventory feed to Amazon
     await submitInventoryFeed(inventoryFeed);
   }

@@ -24,7 +24,7 @@ const syncAmazonToLightspeed = async () => {
       );
       // get a list of order IDs - the time range is measured in minutes: getOrderIDs(minutes)
       // the end of the time range is not now but 60 minutes in the past, due to an issue with the MWS API
-      const orders = await getOrderIDs(240).catch(err => console.error(err));
+      const orders = await getOrderIDs(15).catch(err => console.error(err));
       if (orders === undefined || orders.length === 0) {
         return;
       }
