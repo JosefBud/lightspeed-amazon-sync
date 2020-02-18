@@ -66,7 +66,6 @@ const logName = `full_log_${date.getFullYear()}-${date.getMonth() +
     from: `"Sync Logs" <${user}>`, // sender address
     to: email, // list of receivers
     subject:
-      'TESTING ' +
       'Amazon/Lightspeed sync logs for ' +
       `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`, // Subject line
     text: JSON.stringify(log), // plain text body
