@@ -32,8 +32,8 @@ const syncLightspeedToAmazon = async () => {
           message:
             'No sales were found, so the Lightspeed to Amazon sync is ending.'
         });
-        return;
         resolve(false);
+        return;
       } else {
         resolve(true);
       }
