@@ -3,14 +3,19 @@ const syncLightspeedToAmazon = require('./syncLightspeedToAmazon.js');
 const massSync = require('./massSync.js');
 
 (async () => {
-  await syncAmazonToLightspeed();
+  const thereAreOrders = await syncAmazonToLightspeed();
   //await syncLightspeedToAmazon();
-  await massSync();
+
+  if (thereAreOrders) {
+    await massSync();
+  }
 })();
 
 // 15-minute interval
 setInterval(async () => {
-  await syncAmazonToLightspeed();
+  const thereAreOrders = await syncAmazonToLightspeed();
   //await syncLightspeedToAmazon();
-  await massSync();
+  if (thereAreOrders) {
+    await massSync();
+  }
 }, 900000);

@@ -26,7 +26,7 @@ const syncAmazonToLightspeed = async () => {
       // the end of the time range is not now but 60 minutes in the past, due to an issue with the MWS API
       const orders = await getOrderIDs(15).catch(err => console.error(err));
       if (orders === undefined || orders.length === 0) {
-        resolve();
+        resolve(false);
         return;
       }
 
@@ -75,13 +75,13 @@ const syncAmazonToLightspeed = async () => {
           accountID,
           inventoryCountID
         ).catch(err => console.error(err));
-        resolve();
+        resolve(true);
       } else {
         logger.log({
           level: 'warn',
           message: 'There were no matches, so no inventory count was created'
         });
-        resolve();
+        resolve(false);
       }
     } else {
       reject();
