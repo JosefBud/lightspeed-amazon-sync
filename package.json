@@ -30,6 +30,7 @@
     "amazon-mws": "0.0.25",
     "axios": "^0.19.2",
     "nodemailer": "^6.4.2",
+    "url-encode-decode": "^1.0.0",
     "winston": "^3.2.1",
     "xmlbuilder": "^13.0.2"
   },
