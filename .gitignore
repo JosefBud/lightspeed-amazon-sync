@@ -8,6 +8,9 @@ setEnvVars.sh
 # PM2 ecosystem
 ecosystem.config.js
 
+# Databases
+db/*
+
 # Logs
 logs
 *.log
