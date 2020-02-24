@@ -65,14 +65,14 @@ amazonMws.orders.search(
                 items.push({
                   itemSKU: item.SellerSKU,
                   itemTitle: item.Title,
-                  qty: item.QuantityOrdered
+                  qty: parseInt(item.QuantityOrdered)
                 });
               });
             } else if (orderItemsRaw) {
               items.push({
                 itemSKU: orderItemsRaw.SellerSKU,
                 itemTitle: orderItemsRaw.Title,
-                qty: orderItemsRaw.QuantityOrdered
+                qty: parseInt(orderItemsRaw.QuantityOrdered)
               });
             }
             db.run('UPDATE amazonOrders SET items = $items WHERE id = $id', {
