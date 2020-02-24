@@ -22,9 +22,14 @@ const syncAmazonToLightspeed = async () => {
       const accountID = await getAccountID(authHeader).catch(err =>
         console.error(err)
       );
+
       // get a list of order IDs - the time range is measured in minutes: getOrderIDs(minutes)
-      // the end of the time range is not now but 60 minutes in the past, due to an issue with the MWS API
-      const orders = await getOrderIDs(15).catch(err => console.error(err));
+      // the end of the time range is not now but 5 minutes in the past, due to an issue with the MWS API
+      const orders = await getOrderIDs(
+        authHeader,
+        accountID,
+        60 * 4
+      ).catch(err => console.error(err));
       if (orders === undefined || orders.length === 0) {
         resolve(false);
         return;
@@ -34,24 +39,6 @@ const syncAmazonToLightspeed = async () => {
       let orderItems = await getOrderItems(orders).catch(err =>
         console.error(err)
       );
-      const mockOrderItems = [
-        {
-          itemSKU: '22789',
-          qty: 1
-        },
-        {
-          itemSKU: '22790',
-          qty: 2
-        },
-        {
-          itemSKU: '22791',
-          qty: 3
-        },
-        {
-          itemSKU: '22792',
-          qty: 1
-        }
-      ];
 
       // get Lightspeed item IDs and current sellable quantities of the order items
       orderItems = await getItemIDs(
