@@ -41,11 +41,9 @@ const syncAmazonToLightspeed = async () => {
       );
 
       // get Lightspeed item IDs and current sellable quantities of the order items
-      orderItems = await getItemIDs(
-        authHeader,
-        accountID,
-        orderItems
-      ).catch(err => console.error(err));
+      orderItems = await getItemIDs(authHeader, accountID).catch(err =>
+        console.error(err)
+      );
 
       if (orderItems[0]) {
         // creates an inventory count and fills it with the order items
