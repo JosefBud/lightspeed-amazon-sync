@@ -18,4 +18,4 @@ setInterval(async () => {
   if (thereAreOrders || thereAreSales) {
     await massSync();
   }
-}, 900000);
+}, 15 * 60 * 1000);
