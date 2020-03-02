@@ -34,6 +34,7 @@
     "sqlite3": "^4.1.1",
     "url-encode-decode": "^1.0.0",
     "winston": "^3.2.1",
+    "winston-daily-rotate-file": "^4.4.2",
     "xmlbuilder": "^13.0.2"
   },
   "devDependencies": {
