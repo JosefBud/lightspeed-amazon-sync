@@ -5,6 +5,7 @@ const getOrderItems = require('./lib/functions/amazon/getOrderItems.js');
 const getItemIDs = require('./lib/functions/lightspeed/getItemIDs.js');
 const createInventoryCount = require('./lib/functions/lightspeed/createInventoryCount.js');
 const reconcileInventoryCount = require('./lib/functions/lightspeed/reconcileInventoryCount.js');
+const reconcile = require('./lib/functions/database/reconcile.js');
 const logger = require('./lib/logger.js');
 
 const syncAmazonToLightspeed = async () => {
@@ -25,7 +26,7 @@ const syncAmazonToLightspeed = async () => {
 
       // get a list of order IDs - the time range is measured in minutes: getOrderIDs(minutes)
       // the end of the time range is not now but 5 minutes in the past, due to an issue with the MWS API
-      const orders = await getOrderIDs(authHeader, accountID, 30).catch(err =>
+      let orders = await getOrderIDs(authHeader, accountID, 30).catch(err =>
         console.error(err)
       );
       if (orders === undefined || orders.length === 0) {
@@ -34,14 +35,15 @@ const syncAmazonToLightspeed = async () => {
       }
 
       // get a list of SKUs and their quantities ordered using the order IDs
-      let orderItems = await getOrderItems(orders).catch(err =>
-        console.error(err)
-      );
+      orders = await getOrderItems(orders).catch(err => console.error(err));
 
+      let { orderIDs } = orders;
       // get Lightspeed item IDs and current sellable quantities of the order items
       orderItems = await getItemIDs(authHeader, accountID).catch(err =>
         console.error(err)
       );
+
+      await reconcile(orderIDs);
 
       if (orderItems[0]) {
         // creates an inventory count and fills it with the order items
