@@ -31,6 +31,7 @@
     "axios": "^0.19.2",
     "nodemailer": "^6.4.2",
     "onesignal-node": "^3.0.0",
+    "pdf-puppeteer": "^1.1.10",
     "printer": "^0.4.0",
     "sqlite3": "^4.1.1",
     "url-encode-decode": "^1.0.0",
