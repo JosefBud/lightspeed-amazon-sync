@@ -6,7 +6,7 @@ const sqlite = require('sqlite3');
 const db = new sqlite.Database('../db/amazonOrders.sqlite');
 
 db.run(
-  'CREATE TABLE amazonOrders (id TEXT PRIMARY KEY, purchaseDate TEXT, status TEXT, items TEXT, reconciled INTEGER)'
+  'CREATE TABLE amazonOrders (id TEXT PRIMARY KEY, purchaseDate TEXT, status TEXT, items TEXT, reconciled INTEGER, printed INTEGER)'
 );
 
 let lastUpdatedAfterDate = new Date();
@@ -32,13 +32,14 @@ amazonMws.orders.search(
     orders.forEach(order => {
       orderIDs.push(order.AmazonOrderId);
       db.run(
-        'INSERT INTO amazonOrders (id, purchaseDate, status, items, reconciled) VALUES ($id, $purchaseDate, $status, $items, $reconciled)',
+        'INSERT INTO amazonOrders (id, purchaseDate, status, items, reconciled, printed) VALUES ($id, $purchaseDate, $status, $items, $reconciled, $printed)',
         {
           $id: order.AmazonOrderId,
           $purchaseDate: order.PurchaseDate,
           $status: order.OrderStatus,
           $items: null,
-          $reconciled: 1
+          $reconciled: 1,
+          $printed: 0
         }
       );
     });
