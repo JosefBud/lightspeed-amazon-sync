@@ -9,7 +9,9 @@ const massSync = require('./massSync.js');
   if (thereAreOrders || thereAreSales) {
     await massSync();
   }
-  process.exit(1);
+  setTimeout(() => {
+    process.exit(1);
+  }, 2500);
 })();
 
 // 15-minute interval
