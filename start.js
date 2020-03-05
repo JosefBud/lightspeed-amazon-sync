@@ -18,19 +18,20 @@ const invoiceCreator = require('./lib/functions/printer/invoiceCreator.js');
   let ordersToPrint = await orderGrabber();
   if (ordersToPrint.length > 0) {
     ordersToPrint = await orderItemGrabber(ordersToPrint);
-    ordersToPrint.forEach(async order => {
+    ordersToPrint.forEach(async (order, index) => {
       await invoiceCreator(order);
+      if (index + 1 === ordersToPrint.length) {
+        logger.log({
+          level: 'info',
+          message: 'Process exiting'
+        });
+      }
     });
   }
 
-  logger.log({
-    level: 'info',
-    message: 'Process exiting'
-  });
-
   setTimeout(() => {
     process.exit(1);
-  }, 2.5 * 1000);
+  }, 5 * 1000);
 })();
 
 // 15-minute interval
