@@ -39,7 +39,7 @@ amazonMws.orders.search(
           $status: order.OrderStatus,
           $items: null,
           $reconciled: 1,
-          $printed: 0
+          $printed: 1
         }
       );
     });
