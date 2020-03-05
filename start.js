@@ -17,7 +17,7 @@ const invoiceCreator = require('./lib/functions/printer/invoiceCreator.js');
   let ordersToPrint = await orderGrabber();
   if (ordersToPrint.length > 0) {
     ordersToPrint = await orderItemGrabber(ordersToPrint);
-    ordersToPrint.forEach(order => {
+    ordersToPrint.forEach(async order => {
       await invoiceCreator(order);
     });
   }
