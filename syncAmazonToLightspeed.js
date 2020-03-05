@@ -6,6 +6,9 @@ const getItemIDs = require('./lib/functions/lightspeed/getItemIDs.js');
 const createInventoryCount = require('./lib/functions/lightspeed/createInventoryCount.js');
 const reconcileInventoryCount = require('./lib/functions/lightspeed/reconcileInventoryCount.js');
 const reconcile = require('./lib/functions/database/reconcile.js');
+const orderGrabber = require('./lib/functions/printer/orderGrabber.js');
+const orderItemGrabber = require('./lib/functions/printer/orderItemGrabber.js');
+const invoiceCreator = require('./lib/functions/printer/invoiceCreator.js');
 const logger = require('./lib/logger.js');
 
 const syncAmazonToLightspeed = async () => {
@@ -44,6 +47,15 @@ const syncAmazonToLightspeed = async () => {
       );
 
       await reconcile(orderIDs);
+
+      let ordersToPrint = await orderGrabber();
+      if (ordersToPrint.length > 0) {
+        ordersToPrint = await orderItemGrabber(ordersToPrint);
+        ordersToPrint.forEach(order => {
+          invoiceCreator(order);
+        });
+      }
+      resolve();
 
       if (orderItems[0]) {
         // creates an inventory count and fills it with the order items
