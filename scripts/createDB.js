@@ -10,7 +10,7 @@ db.run(
 );
 
 let lastUpdatedAfterDate = new Date();
-lastUpdatedAfterDate.setMinutes(lastUpdatedAfterDate.getMinutes() - 60 * 48);
+lastUpdatedAfterDate.setMinutes(lastUpdatedAfterDate.getMinutes() - 60 * 24);
 lastUpdatedAfterDate = lastUpdatedAfterDate.toISOString();
 
 amazonMws.orders.search(
