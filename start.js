@@ -1,6 +1,7 @@
 const syncAmazonToLightspeed = require('./syncAmazonToLightspeed.js');
 const syncLightspeedToAmazon = require('./syncLightspeedToAmazon.js');
 const massSync = require('./massSync.js');
+const logger = require('./lib/logger.js');
 
 const orderGrabber = require('./lib/functions/printer/orderGrabber.js');
 const orderItemGrabber = require('./lib/functions/printer/orderItemGrabber.js');
@@ -22,9 +23,14 @@ const invoiceCreator = require('./lib/functions/printer/invoiceCreator.js');
     });
   }
 
+  logger.log({
+    level: 'info',
+    message: 'Process exiting'
+  });
+
   setTimeout(() => {
     process.exit(1);
-  }, 2500);
+  }, 2.5 * 1000);
 })();
 
 // 15-minute interval
