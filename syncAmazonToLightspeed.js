@@ -55,7 +55,6 @@ const syncAmazonToLightspeed = async () => {
           invoiceCreator(order);
         });
       }
-      resolve();
 
       if (orderItems[0]) {
         // creates an inventory count and fills it with the order items
