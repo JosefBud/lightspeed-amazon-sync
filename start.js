@@ -27,6 +27,11 @@ const invoiceCreator = require('./lib/functions/printer/invoiceCreator.js');
         });
       }
     });
+  } else {
+    logger.log({
+      level: 'info',
+      message: 'Process exiting'
+    });
   }
 
   setTimeout(() => {
