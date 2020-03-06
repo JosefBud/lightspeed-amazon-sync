@@ -31,7 +31,7 @@ const invoiceCreator = require('./lib/functions/printer/invoiceCreator.js');
 
   setTimeout(() => {
     process.exit(1);
-  }, 5 * 1000);
+  }, 20 * 1000);
 })();
 
 // 15-minute interval
