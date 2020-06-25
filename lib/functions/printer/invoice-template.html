@@ -1,0 +1,135 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      @import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
+
+      @page {
+        size: 8.5in 11in;
+      }
+
+      body {
+        /* margin: 0.25in; */
+        font-family: 'Muli', sans-serif;
+      }
+
+      .address-top {
+        border-bottom: 5px dotted black;
+      }
+
+      .main {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+      }
+
+      div.logo {
+        width: 100%;
+        padding-top: 0.15in;
+        /*background-image: url('./logo.png');*/
+      }
+
+      img.logo {
+        height: 1.25in;
+      }
+
+      .thank-you {
+        width: 100%;
+      }
+
+      .shipping-and-order-info {
+        display: flex;
+        flex-direction: row;
+      }
+
+      .shipping-info,
+      .order-info {
+        width: 50%;
+      }
+
+      .product-table {
+        margin: 0;
+        width: 100%;
+        border-collapse: collapse;
+        text-align: center;
+      }
+
+      tr.page-break {
+        display: block;
+        page-break-before: always;
+      }
+
+      tr:nth-child(even) {
+        background: #dedede;
+      }
+
+      tr.empty {
+        background: none;
+      }
+
+      th {
+        border-bottom: 2px solid black;
+      }
+
+      td {
+        padding: 0.05in 0;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="address-top">
+      <h4>{name}<br />{address}</h4>
+    </div>
+    <div class="main">
+      <div class="logo">
+        <img
+          src="https://www.greatfeathers.com/pub/media/logo/stores/1/logo_preview.png"
+          class="logo"
+        />
+      </div>
+      <div class="thank-you">
+        <h1>Thank you for your order!</h1>
+      </div>
+      <div class="order-ID">
+        <p><strong>Order ID:</strong> {order ID}</p>
+      </div>
+      <div class="shipping-and-order-info">
+        <div class="shipping-info">
+          <p><strong>Shipping to:</strong></p>
+          <p>{name}<br />{address}</p>
+        </div>
+        <div class="order-info">
+          <p><strong>Order Date:</strong> {order date}</p>
+          <p><strong>Shipping Service:</strong> {shipping service}</p>
+        </div>
+      </div>
+      <div class="product-info">
+        <table class="product-table">
+          <tr class="product-table__header">
+            <th>Quantity</th>
+            <th>Product Details</th>
+            <th>Price</th>
+            <th>Order Totals</th>
+          </tr>
+
+          <tbody>
+            {order items}
+            <tr>
+              <td colspan="3">&nbsp;</td>
+              <td><strong>Grand Total: ${grand total}</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="bad-review">
+        <h3>Something wrong?</h3>
+        <p>
+          Shoot us an e-mail or give us a call before leaving a bad review! We
+          pride ourselves on our customer service and will do everything we can
+          to help!
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

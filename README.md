@@ -2,6 +2,8 @@
 
 A Node.js app to sync inventory counts between Lightspeed Retail and an Amazon merchant account
 
+This app matches items with the **Custom SKU** field in Lightspeed and your **Seller SKU** in Amazon. So, for example, if an Amazon item's Seller SKU is `ABC123`, then that item's Custom SKU in Lightspeed needs to also be `ABC123`.
+
 Set up the following environment variables:
 
 ```
@@ -23,5 +25,3 @@ SMTP_USER=your email username (synclogs@example.com)
 SMTP_PASSWORD=your email password (eXaMPLe!123%)
 LOG_RECIPIENT_EMAIL=where the log is sent (johndoe@example.com)
 ```
-
-This app matches items with the **Custom SKU** field in Lightspeed and your **Seller SKU** in Amazon. So, for example, if an Amazon item's Seller SKU is `ABC123`, then that item's Custom SKU in Lightspeed needs to also be `ABC123`.

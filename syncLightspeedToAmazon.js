@@ -32,8 +32,13 @@ const syncLightspeedToAmazon = async () => {
           message:
             'No sales were found, so the Lightspeed to Amazon sync is ending.'
         });
+        resolve(false);
         return;
+      } else {
+        resolve(true);
       }
+
+      return;
       // parsing the sales into an array of small objects that only contain necessary info
       let sales = await parseSales(salesRaw).catch(err => console.error(err));
 

@@ -30,13 +30,20 @@
     "amazon-mws": "0.0.25",
     "axios": "^0.19.2",
     "nodemailer": "^6.4.2",
+    "onesignal-node": "^3.0.0",
+    "pdf-puppeteer": "^1.1.10",
+    "printer": "^0.4.0",
+    "sqlite3": "^4.1.1",
+    "url-encode-decode": "^1.0.0",
     "winston": "^3.2.1",
+    "winston-daily-rotate-file": "^4.4.2",
     "xmlbuilder": "^13.0.2"
   },
   "devDependencies": {
     "decache": "^4.5.1",
     "dotenv": "^8.2.0",
     "mocha": "^7.0.1",
+    "mock-require": "^3.0.3",
     "nyc": "^15.0.0"
   }
 }
