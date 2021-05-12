@@ -29,7 +29,7 @@
   "dependencies": {
     "amazon-mws": "0.0.25",
     "axios": "^0.19.2",
-    "nodemailer": "^6.4.2",
+    "nodemailer": "^6.4.16",
     "onesignal-node": "^3.0.0",
     "pdf-puppeteer": "^1.1.10",
     "printer": "^0.4.0",
