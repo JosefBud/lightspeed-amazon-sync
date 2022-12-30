@@ -42,7 +42,7 @@
   "devDependencies": {
     "decache": "^4.5.1",
     "dotenv": "^8.2.0",
-    "mocha": "^7.0.1",
+    "mocha": "^10.2.0",
     "mock-require": "^3.0.3",
     "nyc": "^15.0.0"
   }
